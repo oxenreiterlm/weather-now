@@ -85,6 +85,9 @@ h2 {
   text-align: center;
   padding-top: 8px;
 }
+.currentDateTime {
+  padding-bottom: 20px;
+}
 h6 {
   text-align: center;
   font-style: italic;
@@ -98,11 +101,7 @@ h6 {
   font-size: 34px;
   text-align: center;
 }
-.currentWeatherBlock {
-  vertical-align: middle;
-  display: block;
-  margin: 0 auto;
-}
+
 .currentIcon {
   height: 140px;
   vertical-align: middle;
