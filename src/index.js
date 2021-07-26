@@ -58,6 +58,7 @@ function showCurrentWeather(response) {
     "src",
     `http://openweathermap.org/img/wn/${response.data.weather[0].icon}@2x.png`
   );
+  currentWeatherIcon.setAttribute("alt", response.data.weather[0].description);
 }
 
 function updateCity(event) {
@@ -102,6 +103,7 @@ function showCurrentWeather2(response) {
     "src",
     `http://openweathermap.org/img/wn/${response.data.weather[0].icon}@2x.png`
   );
+  currentWeatherIcon.setAttribute("alt", response.data.weather[0].description);
 }
 function findCurrentLatLon(position) {
   let currentLat = position.coords.latitude;
