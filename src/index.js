@@ -53,6 +53,11 @@ function showCurrentWeather(response) {
   let humidity = response.data.main.humidity;
   let humidityInput = document.querySelector("#humidity-input");
   humidityInput.innerHTML = `humidity: ${humidity}%`;
+  let currentWeatherIcon = document.querySelector("#current-weather-icon");
+  currentWeatherIcon.setAttribute(
+    "src",
+    `http://openweathermap.org/img/wn/${response.data.weather[0].icon}@2x.png`
+  );
 }
 
 function updateCity(event) {
