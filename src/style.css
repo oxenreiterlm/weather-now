@@ -65,7 +65,7 @@ button:hover {
 
 .mainSection {
   margin-top: 50px;
-  margin-bottom: 50px;
+  margin-bottom: 20px;
   border-style: solid;
   border-color: #b9d8e8;
   padding: 10px;
@@ -134,4 +134,7 @@ ul {
 }
 .highLow {
   font-size: 32px;
+}
+.signature {
+  text-align: center;
 }
