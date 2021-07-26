@@ -6,8 +6,8 @@ body {
   font-family: "Raleway", sans-serif;
   color: #09628e;
   margin-top: 5px;
-  margin-left: 12%;
-  margin-right: 12%;
+  margin-left: 15%;
+  margin-right: 15%;
   background: radial-gradient(
     328px at 2.9% 15%,
     rgb(191, 224, 251) 0%,
@@ -98,7 +98,11 @@ h6 {
   font-size: 34px;
   text-align: center;
 }
-
+.currentWeatherBlock {
+  vertical-align: middle;
+  display: block;
+  margin: 0 auto;
+}
 .currentIcon {
   height: 140px;
   vertical-align: middle;
@@ -129,11 +133,11 @@ ul {
   line-height: 1.5em;
 }
 .day {
-  font-size: 38px;
+  font-size: 30px;
   font-weight: 500;
 }
 .highLow {
-  font-size: 32px;
+  font-size: 28px;
 }
 .signature {
   text-align: center;
