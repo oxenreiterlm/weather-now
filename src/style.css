@@ -97,6 +97,7 @@ h6 {
   font-weight: 500;
   font-size: 20px;
 }
+
 .card-body {
   font-size: 34px;
   text-align: center;
@@ -108,7 +109,21 @@ h6 {
   display: block;
   margin: 0 auto;
 }
+.inactive {
+  text-decoration-line: none;
+}
+.inactive:hover {
+  text-decoration: none;
+}
+.active {
+  color: black;
+  cursor: default;
+  text-decoration: none;
+}
 
+.active:hover {
+  text-decoration: none;
+}
 .todayIcon {
   height: 140px;
   vertical-align: middle;

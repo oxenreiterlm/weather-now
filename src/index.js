@@ -42,8 +42,9 @@ dateTimeNow.innerHTML = `${currentDay}, ${currentMonth} ${currentDate} at ${curr
 
 function showCurrentWeather(response) {
   let temp = Math.round(response.data.main.temp);
+  fahrenheitTemp = response.data.main.temp;
   let tempInput = document.querySelector("#temp");
-  tempInput.innerHTML = `${temp}°F`;
+  tempInput.innerHTML = `${temp}`;
   let weatherDesc = response.data.weather[0].description;
   let weatherDescInput = document.querySelector("#weather-desc-input");
   weatherDescInput.innerHTML = `${weatherDesc}`;
@@ -58,7 +59,6 @@ function showCurrentWeather(response) {
     "src",
     `http://openweathermap.org/img/wn/${response.data.weather[0].icon}@2x.png`
   );
-  currentWeatherIcon.setAttribute("alt", response.data.weather[0].description);
 }
 
 function updateCity(event) {
@@ -81,14 +81,14 @@ function clickCurrent() {
 }
 function showCurrentWeather2(response) {
   let cityName = response.data.name;
-  console.log(cityName);
   let cityUpdate = document.querySelector(".cityUpdate");
   cityUpdate.innerHTML = `${cityName}`;
   let cityUpdate2 = document.querySelector(".cityUpdate2");
   cityUpdate2.innerHTML = `${cityName}`;
   let temp = Math.round(response.data.main.temp);
   let tempInput = document.querySelector("#temp");
-  tempInput.innerHTML = `${temp}°F`;
+  fahrenheitTemp = response.data.main.temp;
+  tempInput.innerHTML = `${temp}`;
   let weatherDesc = response.data.weather[0].description;
   let weatherDescInput = document.querySelector("#weather-desc-input");
   weatherDescInput.innerHTML = `${weatherDesc}`;
@@ -107,12 +107,34 @@ function showCurrentWeather2(response) {
 }
 function findCurrentLatLon(position) {
   let currentLat = position.coords.latitude;
-  console.log(currentLat);
   let currentLon = position.coords.longitude;
-  console.log(currentLon);
   let apiKey = "7c78b83b2a3e65f370802905f8ab06e0";
   let apiUrl = `https://api.openweathermap.org/data/2.5/weather?lat=${currentLat}&lon=${currentLon}&appid=${apiKey}&units=imperial`;
   axios.get(`${apiUrl}`).then(showCurrentWeather2);
 }
 let currentLoc = document.querySelector(".currentLoc");
 currentLoc.addEventListener("click", clickCurrent);
+
+function showCelsiusTemp(event) {
+  event.preventDefault;
+  let celsiusTemp = Math.round(((fahrenheitTemp - 32) * 5) / 9);
+  let tempElement = document.querySelector("#temp");
+  fahrenheitLink.classList.remove("active");
+  celsiusLink.classList.add("active");
+  tempElement.innerHTML = `${celsiusTemp}`;
+}
+
+function showFahrenheitTemp(event) {
+  event.preventDefault;
+  let tempElement = document.querySelector("#temp");
+  fahrenheitLink.classList.add("active");
+  celsiusLink.classList.remove("active");
+  tempElement.innerHTML = Math.round(fahrenheitTemp);
+}
+let fahrenheitTemp = null;
+
+let celsiusLink = document.querySelector("#celsius-link");
+celsiusLink.addEventListener("click", showCelsiusTemp);
+
+let fahrenheitLink = document.querySelector("#fahrenheit-link");
+fahrenheitLink.addEventListener("click", showFahrenheitTemp);
