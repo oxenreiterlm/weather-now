@@ -8,6 +8,7 @@ body {
   margin-top: 5px;
   margin-left: 15%;
   margin-right: 15%;
+  padding-bottom: 15px;
   background: radial-gradient(
     328px at 2.9% 15%,
     rgb(191, 224, 251) 0%,
@@ -106,7 +107,7 @@ h6 {
 .currentIcon {
   height: 140px;
   vertical-align: middle;
-  display: block;
+
   margin: 0 auto;
 }
 a {
@@ -129,7 +130,6 @@ a {
 }
 .todayIcon {
   height: 140px;
-  vertical-align: middle;
   display: block;
   margin: 0 auto;
   text-align: center;
@@ -149,12 +149,18 @@ ul {
   padding: 0 0 11px 0;
   line-height: 1.5em;
 }
-.day {
+.weatherForecastDate {
   font-size: 30px;
   font-weight: 500;
 }
-.highLow {
-  font-size: 28px;
+.weatherForecastTemps {
+  font-size: 24px;
+}
+.weatherForecastTempMin {
+  opacity: 70%;
+}
+.forecastedPrecipLine {
+  font-size: 20px;
 }
 .signature {
   text-align: center;
