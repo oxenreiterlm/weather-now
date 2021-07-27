@@ -109,6 +109,9 @@ h6 {
   display: block;
   margin: 0 auto;
 }
+a {
+  text-decoration: none;
+}
 .inactive {
   text-decoration-line: none;
 }
