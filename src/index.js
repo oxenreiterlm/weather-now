@@ -43,11 +43,14 @@ dateTimeNow.innerHTML = `${currentDay}, ${currentMonth} ${currentDate} at ${curr
 function getForecast(coordinates) {
   let apiKey = "7c78b83b2a3e65f370802905f8ab06e0";
   let apiUrl = `https://api.openweathermap.org/data/2.5/onecall?lat=${coordinates.lat}&lon=${coordinates.lon}&appid=${apiKey}&units=imperial`;
-  console.log(apiUrl);
   axios.get(apiUrl).then(displayForecast);
 }
 
 function showCurrentWeather(response) {
+  let cityUpdate = document.querySelector(".cityUpdate");
+  cityUpdate.innerHTML = response.data.name;
+  let cityUpdate2 = document.querySelector(".cityUpdate2");
+  cityUpdate2.innerHTML = response.data.name;
   let temp = Math.round(response.data.main.temp);
   fahrenheitTemp = response.data.main.temp;
   let tempInput = document.querySelector("#temp");
@@ -87,53 +90,26 @@ city.addEventListener("submit", updateCity);
 function clickCurrent() {
   navigator.geolocation.getCurrentPosition(findCurrentLatLon);
 }
-function showCurrentWeather2(response) {
-  let cityName = response.data.name;
-  let cityUpdate = document.querySelector(".cityUpdate");
-  cityUpdate.innerHTML = `${cityName}`;
-  let cityUpdate2 = document.querySelector(".cityUpdate2");
-  cityUpdate2.innerHTML = `${cityName}`;
-  let temp = Math.round(response.data.main.temp);
-  let tempInput = document.querySelector("#temp");
-  fahrenheitTemp = response.data.main.temp;
-  tempInput.innerHTML = `${temp}`;
-  let weatherDesc = response.data.weather[0].description;
-  let weatherDescInput = document.querySelector("#weather-desc-input");
-  weatherDescInput.innerHTML = `${weatherDesc}`;
-  let windSpeed = Math.round(response.data.wind.speed);
-  let windSpeedInput = document.querySelector("#wind-speed-input");
-  windSpeedInput.innerHTML = `wind: ${windSpeed} mph`;
-  let humidity = response.data.main.humidity;
-  let humidityInput = document.querySelector("#humidity-input");
-  humidityInput.innerHTML = `humidity: ${humidity}%`;
-  let currentWeatherIcon = document.querySelector("#current-weather-icon");
-  currentWeatherIcon.setAttribute(
-    "src",
-    `http://openweathermap.org/img/wn/${response.data.weather[0].icon}@2x.png`
-  );
-  currentWeatherIcon.setAttribute("alt", response.data.weather[0].description);
-  getForecast(response.data.coord);
-}
 
 function displayForecast(response) {
-  console.log(response.data.daily);
+  let forecast = response.data.daily;
+  console.log(forecast);
   let forecastElement = document.querySelector("#forecast");
   let forecastHTML = "";
-  let days = ["Sun", "Mon", "Tues", "Weds"];
-  days.forEach(function (day) {
+  forecast.forEach(function (forecastDay) {
     forecastHTML =
       forecastHTML +
       `<div class="col-3">
             <div class="card">
               <div class="card-body">
-                <div class="weatherForecastDate">${day}</div>
+                <div class="weatherForecastDate">${forecastDay.dt}</div>
                 <div>
                   <img
-                    src="media/partly_sunny_rainy_icon.svg"
+                    src="http://openweathermap.org/img/wn/${forecast.weather[0].icon}@2x.png"
                     alt=""
                   />
                 </div>
-                <div class="weatherForecastTemps"><span class="weatherForecastTempMax">92°</span>/<span class="weatherForecastTempMin">78°</span></div>
+                <div class="weatherForecastTemps"><span class="weatherForecastTempMax">${forecastDay.temp.max}°</span>/<span class="weatherForecastTempMin">${forecastDay.temp.min}°</span></div>
                 <div class="forecastedPrecipLine">💧<span class="forecastedPrecip">10</span>%</div>
               </div>
             </div>
@@ -148,7 +124,7 @@ function findCurrentLatLon(position) {
   let currentLon = position.coords.longitude;
   let apiKey = "7c78b83b2a3e65f370802905f8ab06e0";
   let apiUrl = `https://api.openweathermap.org/data/2.5/weather?lat=${currentLat}&lon=${currentLon}&appid=${apiKey}&units=imperial`;
-  axios.get(`${apiUrl}`).then(showCurrentWeather2);
+  axios.get(`${apiUrl}`).then(showCurrentWeather);
 }
 let currentLoc = document.querySelector(".currentLoc");
 currentLoc.addEventListener("click", clickCurrent);
