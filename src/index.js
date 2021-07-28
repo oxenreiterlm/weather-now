@@ -40,6 +40,13 @@ let currentDate = now.getDate();
 let dateTimeNow = document.querySelector("#date-time-now");
 dateTimeNow.innerHTML = `${currentDay}, ${currentMonth} ${currentDate} at ${currentHour}`;
 
+function getForecast(coordinates) {
+  let apiKey = "7c78b83b2a3e65f370802905f8ab06e0";
+  let apiUrl = `https://api.openweathermap.org/data/2.5/onecall?lat=${coordinates.lat}&lon=${coordinates.lon}&appid=${apiKey}&units=imperial`;
+  console.log(apiUrl);
+  axios.get(apiUrl).then(displayForecast);
+}
+
 function showCurrentWeather(response) {
   let temp = Math.round(response.data.main.temp);
   fahrenheitTemp = response.data.main.temp;
@@ -59,6 +66,7 @@ function showCurrentWeather(response) {
     "src",
     `http://openweathermap.org/img/wn/${response.data.weather[0].icon}@2x.png`
   );
+  getForecast(response.data.coord);
 }
 
 function updateCity(event) {
@@ -104,9 +112,11 @@ function showCurrentWeather2(response) {
     `http://openweathermap.org/img/wn/${response.data.weather[0].icon}@2x.png`
   );
   currentWeatherIcon.setAttribute("alt", response.data.weather[0].description);
+  getForecast(response.data.coord);
 }
 
-function displayForecast() {
+function displayForecast(response) {
+  console.log(response.data.daily);
   let forecastElement = document.querySelector("#forecast");
   let forecastHTML = "";
   let days = ["Sun", "Mon", "Tues", "Weds"];
@@ -166,5 +176,3 @@ celsiusLink.addEventListener("click", showCelsiusTemp);
 
 let fahrenheitLink = document.querySelector("#fahrenheit-link");
 fahrenheitLink.addEventListener("click", showFahrenheitTemp);
-
-displayForecast();
