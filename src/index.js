@@ -105,6 +105,34 @@ function showCurrentWeather2(response) {
   );
   currentWeatherIcon.setAttribute("alt", response.data.weather[0].description);
 }
+
+function displayForecast() {
+  let forecastElement = document.querySelector("#forecast");
+  let forecastHTML = "";
+  let days = ["Sun", "Mon", "Tues", "Weds"];
+  days.forEach(function (day) {
+    forecastHTML =
+      forecastHTML +
+      `<div class="col-3">
+            <div class="card">
+              <div class="card-body">
+                <div class="weatherForecastDate">${day}</div>
+                <div>
+                  <img
+                    src="media/partly_sunny_rainy_icon.svg"
+                    alt=""
+                  />
+                </div>
+                <div class="weatherForecastTemps"><span class="weatherForecastTempMax">92°</span>/<span class="weatherForecastTempMin">78°</span></div>
+                <div class="forecastedPrecipLine">💧<span class="forecastedPrecip">10</span>%</div>
+              </div>
+            </div>
+          </div>`;
+  });
+
+  forecastElement.innerHTML = forecastHTML;
+}
+
 function findCurrentLatLon(position) {
   let currentLat = position.coords.latitude;
   let currentLon = position.coords.longitude;
@@ -138,3 +166,5 @@ celsiusLink.addEventListener("click", showCelsiusTemp);
 
 let fahrenheitLink = document.querySelector("#fahrenheit-link");
 fahrenheitLink.addEventListener("click", showFahrenheitTemp);
+
+displayForecast();
