@@ -90,6 +90,12 @@ city.addEventListener("submit", updateCity);
 function clickCurrent() {
   navigator.geolocation.getCurrentPosition(findCurrentLatLon);
 }
+function convertTimeStampToDay(timestamp) {
+  let date = new Date(timestamp * 1000);
+  let day = date.getDay();
+  let days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+  return days[day];
+}
 
 function displayForecast(response) {
   let forecast = response.data.daily;
@@ -102,15 +108,25 @@ function displayForecast(response) {
       `<div class="col-3">
             <div class="card">
               <div class="card-body">
-                <div class="weatherForecastDate">${forecastDay.dt}</div>
+                <div class="weatherForecastDate">${convertTimeStampToDay(
+                  forecastDay.dt
+                )}</div>
                 <div>
                   <img
-                    src="http://openweathermap.org/img/wn/${forecastDay.weather[0].icon}@2x.png"
+                    src="http://openweathermap.org/img/wn/${
+                      forecastDay.weather[0].icon
+                    }@2x.png"
                     alt=""
                   />
                 </div>
-                <div class="weatherForecastTemps"><span class="weatherForecastTempMax">${forecastDay.temp.max}°</span>/<span class="weatherForecastTempMin">${forecastDay.temp.min}°</span></div>
-                <div class="forecastedPrecipLine">💧<span class="forecastedPrecip">${forecastDay.pop}</span>%</div>
+                <div class="weatherForecastTemps"><span class="weatherForecastTempMax">${Math.round(
+                  forecastDay.temp.max
+                )}°</span>/<span class="weatherForecastTempMin">${Math.round(
+        forecastDay.temp.min
+      )}°</span></div>
+                <div class="forecastedPrecipLine">💧<span class="forecastedPrecip">${
+                  forecastDay.pop
+                }</span>%</div>
               </div>
             </div>
           </div>`;
