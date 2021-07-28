@@ -93,7 +93,7 @@ function clickCurrent() {
 
 function displayForecast(response) {
   let forecast = response.data.daily;
-  console.log(forecast);
+  console.log(response);
   let forecastElement = document.querySelector("#forecast");
   let forecastHTML = "";
   forecast.forEach(function (forecastDay) {
@@ -105,12 +105,12 @@ function displayForecast(response) {
                 <div class="weatherForecastDate">${forecastDay.dt}</div>
                 <div>
                   <img
-                    src="http://openweathermap.org/img/wn/${forecast.weather[0].icon}@2x.png"
+                    src="http://openweathermap.org/img/wn/${forecastDay.weather[0].icon}@2x.png"
                     alt=""
                   />
                 </div>
                 <div class="weatherForecastTemps"><span class="weatherForecastTempMax">${forecastDay.temp.max}°</span>/<span class="weatherForecastTempMin">${forecastDay.temp.min}°</span></div>
-                <div class="forecastedPrecipLine">💧<span class="forecastedPrecip">10</span>%</div>
+                <div class="forecastedPrecipLine">💧<span class="forecastedPrecip">${forecastDay.pop}</span>%</div>
               </div>
             </div>
           </div>`;
