@@ -45,6 +45,7 @@ function getForecast(coordinates) {
   let apiUrl = `https://api.openweathermap.org/data/2.5/onecall?lat=${coordinates.lat}&lon=${coordinates.lon}&appid=${apiKey}&units=imperial`;
   axios.get(apiUrl).then(displayForecast);
   axios.get(apiUrl).then(showWeatherToday);
+  axios.get(apiUrl).then(showWeatherHourly);
 }
 
 function showCurrentWeather(response) {
@@ -71,6 +72,41 @@ function showCurrentWeather(response) {
     `http://openweathermap.org/img/wn/${response.data.weather[0].icon}@2x.png`
   );
   getForecast(response.data.coord);
+}
+function convertTimeStampToHour(timestamp) {
+  let hour = new Date(timestamp);
+  let hours = hour.getDay();
+  let weatherHour = [
+    "12:00",
+    "1:00",
+    "2:00",
+    "3:00",
+    "4:00",
+    "5:00",
+    "6:00",
+    "7:00",
+    "8:00",
+    "9:00",
+    "10:00",
+    "11:00",
+  ];
+  return weatherHour[hours];
+}
+
+function showWeatherHourly(response) {
+  let hourlyForecast = response.data.hourly;
+  console.log(response.data.hourly);
+  console.log(hourlyForecast[0].dt);
+  let hourlyForecastElement = document.querySelector("#hourly-forecast");
+  let hourlyForecastHTML = "";
+  hourlyForecast.forEach(function (forecastHour) {
+    hourlyForecastHTML =
+      hourlyForecastHTML +
+      `<li><span class="hourlyTime">${convertTimeStampToHour(
+        forecastHour.dt
+      )}</span><span class="hourlyPrecip"></span>/<span class="hourlyTemp"></span><span class = "hourlyIcon"></span></li>`;
+  });
+  hourlyForecastElement.innerHTML = hourlyForecastHTML;
 }
 
 function showWeatherToday(response) {
