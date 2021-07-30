@@ -38,12 +38,13 @@ let months = [
 let currentMonth = months[now.getMonth()];
 let currentDate = now.getDate();
 let dateTimeNow = document.querySelector("#date-time-now");
-dateTimeNow.innerHTML = `${currentDay}, ${currentMonth} ${currentDate} at ${currentHour}`;
+dateTimeNow.innerHTML = `Updated: ${currentDay}, ${currentMonth} ${currentDate} at ${currentHour}`;
 
 function getForecast(coordinates) {
   let apiKey = "7c78b83b2a3e65f370802905f8ab06e0";
   let apiUrl = `https://api.openweathermap.org/data/2.5/onecall?lat=${coordinates.lat}&lon=${coordinates.lon}&appid=${apiKey}&units=imperial`;
   axios.get(apiUrl).then(displayForecast);
+  axios.get(apiUrl).then(showWeatherToday);
 }
 
 function showCurrentWeather(response) {
@@ -70,6 +71,17 @@ function showCurrentWeather(response) {
     `http://openweathermap.org/img/wn/${response.data.weather[0].icon}@2x.png`
   );
   getForecast(response.data.coord);
+}
+
+function showWeatherToday(response) {
+  let todayHighTemp = document.querySelector(".todayHighTemp");
+  let todayLowTemp = document.querySelector(".todayLowTemp");
+  let todayDailyDesc = document.querySelector(".todayDailyDesc");
+  let highTempAPI = Math.round(response.data.daily[0].temp.max);
+  todayHighTemp.innerHTML = `${highTempAPI}°`;
+  let lowTempAPI = Math.round(response.data.daily[0].temp.min);
+  todayLowTemp.innerHTML = `${lowTempAPI}°`;
+  todayDailyDesc.innerHTML = response.data.daily[0].weather[0].description;
 }
 
 function updateCity(event) {
