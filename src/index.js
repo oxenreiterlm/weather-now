@@ -82,6 +82,11 @@ function showWeatherToday(response) {
   let lowTempAPI = Math.round(response.data.daily[0].temp.min);
   todayLowTemp.innerHTML = `${lowTempAPI}°`;
   todayDailyDesc.innerHTML = response.data.daily[0].weather[0].description;
+  let todayIcon = document.querySelector(".todayIcon");
+  todayIcon.setAttribute(
+    "src",
+    `http://openweathermap.org/img/wn/${response.data.daily[0].weather[0].icon}@2x.png`
+  );
 }
 
 function updateCity(event) {
