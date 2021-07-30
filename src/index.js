@@ -104,6 +104,7 @@ function displayForecast(response) {
   let forecastHTML = "";
   forecast.forEach(function (forecastDay, index) {
     if (index < 5 && index > 0) {
+      let forecastPrecip = Math.round(forecastDay.pop * 10);
       forecastHTML =
         forecastHTML +
         `<div class="col-3">
@@ -125,9 +126,7 @@ function displayForecast(response) {
                 )}°</span>/<span class="weatherForecastTempMin">${Math.round(
           forecastDay.temp.min
         )}°</span></div>
-                <div class="forecastedPrecipLine">💧<span class="forecastedPrecip">${
-                  forecastDay.pop
-                }</span>%</div>
+                <div class="forecastedPrecipLine">💧<span class="forecastedPrecip">${forecastPrecip}</span>%</div>
               </div>
             </div>
           </div>`;
@@ -170,3 +169,5 @@ celsiusLink.addEventListener("click", showCelsiusTemp);
 
 let fahrenheitLink = document.querySelector("#fahrenheit-link");
 fahrenheitLink.addEventListener("click", showFahrenheitTemp);
+
+clickCurrent();
