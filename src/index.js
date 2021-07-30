@@ -102,10 +102,11 @@ function displayForecast(response) {
   console.log(response);
   let forecastElement = document.querySelector("#forecast");
   let forecastHTML = "";
-  forecast.forEach(function (forecastDay) {
-    forecastHTML =
-      forecastHTML +
-      `<div class="col-3">
+  forecast.forEach(function (forecastDay, index) {
+    if (index < 5 && index > 0) {
+      forecastHTML =
+        forecastHTML +
+        `<div class="col-3">
             <div class="card">
               <div class="card-body">
                 <div class="weatherForecastDate">${convertTimeStampToDay(
@@ -122,14 +123,15 @@ function displayForecast(response) {
                 <div class="weatherForecastTemps"><span class="weatherForecastTempMax">${Math.round(
                   forecastDay.temp.max
                 )}°</span>/<span class="weatherForecastTempMin">${Math.round(
-        forecastDay.temp.min
-      )}°</span></div>
+          forecastDay.temp.min
+        )}°</span></div>
                 <div class="forecastedPrecipLine">💧<span class="forecastedPrecip">${
                   forecastDay.pop
                 }</span>%</div>
               </div>
             </div>
           </div>`;
+    }
   });
 
   forecastElement.innerHTML = forecastHTML;
