@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Weather Now</title>
+    <title>Weather Now!</title>
     <link
       href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
       rel="stylesheet"
@@ -23,7 +23,7 @@
   <body>
     <div class="container">
       <div class="heading">
-        <form id="search">
+        <form id="search"><img class="logo" src="media/weatherNowLogo.png" alt="Weather Now Logo">
           <input
             class="citySearch"
             type="text"
@@ -33,7 +33,7 @@
             id="input-city"
           />
           <button class="search">Search</button>
-          <button class="currentLoc">Current Location</button>
+          <button class="currentLoc">🧭Current Location</button>
         </form>
       </div>
 
@@ -46,9 +46,7 @@
                   <div class="currentDateTime"><h6 id="date-time-now"></h6></div></div>
                 <div class="row align-items-start">
                   <div class="col-sm-5 ">
-                    <img
-                      src="media/sunny_icon.svg"
-                      alt="sunny"
+                    <img                  
                       id = "current-weather-icon"
                       class="currentIcon"
                     />
@@ -74,13 +72,9 @@
                 </div>
                 <div class="row align-items-start">
                   <div class="col">
-                    <img
-                      src="media/partly_cloudy_icon.svg"
-                      alt="partly cloudy"
-                      class="todayIcon"
-                    />
-                    <h4 class="weatherToday"><span class="todayHighTemp"></span>
-                      /<span class = "todayLowTemp"></span>
+                    <img class="todayIcon" />
+                    <h4 class="weatherToday"><span class="todayHighTemp">/</span>
+                      <span class = "todayLowTemp"></span>
                       <div class="todayDailyDesc"></div>
                     </h4>
                   </div>

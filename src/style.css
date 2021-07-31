@@ -20,6 +20,7 @@ body {
   position: relative;
   top: 25px;
 }
+
 .citySearch {
   border-radius: 20px;
   font-size: 20px;
@@ -43,6 +44,13 @@ button {
 button:hover {
   opacity: 65%;
 }
+.logo {
+  height: 100px;
+  margin-right: 70px;
+  left: 50%;
+  top: 50%;
+  transform: translate(0, -25%);
+}
 
 .search {
   background-color: #72a298;
@@ -56,13 +64,13 @@ button:hover {
   border-style: solid;
   border: #849299;
   border-width: 6px;
-  float: right;
+  margin-right: 0;
   box-shadow: 5px 5px 2px #e2dede;
   border: 4px solid #e88d66;
 }
 
 .mainSection {
-  margin-top: 50px;
+  margin-top: 30px;
   margin-bottom: 20px;
   border-style: solid;
   border-color: #72a298;
@@ -93,7 +101,7 @@ h6 {
 .weatherToday {
   text-align: center;
   font-weight: 500;
-  font-size: 20px;
+  font-size: 24px;
 }
 
 .card-body {
@@ -130,6 +138,9 @@ a {
   display: block;
   margin: 0 auto;
   text-align: center;
+}
+.todayLowTemp {
+  opacity: 70%;
 }
 .willItRain {
   padding-top: 13px;
