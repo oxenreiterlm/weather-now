@@ -73,6 +73,37 @@ function showCurrentWeather(response) {
   );
   getForecast(response.data.coord);
 }
+function convertTimeStampToHour(timestamp) {
+  let date = new Date(timestamp * 1000);
+  let hour = date.getHours();
+  let hours = [
+    "12:00",
+    "1:00",
+    "2:00",
+    "3:00",
+    "4:00",
+    "5:00",
+    "6:00",
+    "7:00",
+    "8:00",
+    "9:00",
+    "10:00",
+    "11:00",
+    "12:00",
+    "1:00",
+    "2:00",
+    "3:00",
+    "4:00",
+    "5:00",
+    "6:00",
+    "7:00",
+    "8:00",
+    "9:00",
+    "10:00",
+    "11:00",
+  ];
+  return hours[hour];
+}
 
 function showWeatherHourly(response) {
   let hourlyForecast = response.data.hourly;
@@ -85,16 +116,24 @@ function showWeatherHourly(response) {
     if (forecastHour.pop > 0.5) {
       hourlyForecastHTML =
         hourlyForecastHTML +
-        `<li><span>${forecastHour.dt}--></span><span></span><span>${Math.round(
+        `<li><span>${convertTimeStampToHour(
+          forecastHour.dt
+        )} </span><span></span><span>${Math.round(
           forecastHour.temp
-        )}°</span> / <span></span><span>💧${Math.round(forecastHour.pop * 100)}%
+        )}°</span> and <span></span><span>💧${Math.round(
+          forecastHour.pop * 100
+        )}%
       </span><span>☂</span></li>`;
     } else {
       hourlyForecastHTML =
         hourlyForecastHTML +
-        `<li><span>${forecastHour.dt}--> </span><span></span><span>${Math.round(
+        `<li><span>${convertTimeStampToHour(
+          forecastHour.dt
+        )} </span><span></span><span>${Math.round(
           forecastHour.temp
-        )}°</span> / <span></span><span>💧${Math.round(forecastHour.pop * 100)}%
+        )}°</span> and <span></span><span>💧${Math.round(
+          forecastHour.pop * 100
+        )}%
       </span><span>👟</span></li>`;
     }
   });
