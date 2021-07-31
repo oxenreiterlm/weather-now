@@ -73,38 +73,23 @@ function showCurrentWeather(response) {
   );
   getForecast(response.data.coord);
 }
-function convertTimeStampToHour(timestamp) {
-  let hour = new Date(timestamp);
-  let hours = hour.getDay();
-  let weatherHour = [
-    "12:00",
-    "1:00",
-    "2:00",
-    "3:00",
-    "4:00",
-    "5:00",
-    "6:00",
-    "7:00",
-    "8:00",
-    "9:00",
-    "10:00",
-    "11:00",
-  ];
-  return weatherHour[hours];
-}
 
 function showWeatherHourly(response) {
   let hourlyForecast = response.data.hourly;
+  let hourlyTemp = response.data.hourly[0].temp;
   console.log(response.data.hourly);
-  console.log(hourlyForecast[0].dt);
+  console.log(response.data.hourly[0].pop);
   let hourlyForecastElement = document.querySelector("#hourly-forecast");
   let hourlyForecastHTML = "";
   hourlyForecast.forEach(function (forecastHour) {
     hourlyForecastHTML =
       hourlyForecastHTML +
-      `<li><span class="hourlyTime">${convertTimeStampToHour(
-        forecastHour.dt
-      )}</span><span class="hourlyPrecip"></span>/<span class="hourlyTemp"></span><span class = "hourlyIcon"></span></li>`;
+      `<li><span class="hourlyTime"></span><span class="hourlyPrecip">${Math.round(
+        forecastHour.pop * 10
+      )}%
+      </span>/<span class="hourlyTemp"></span><span class = "hourlyIcon">${Math.round(
+        forecastHour.temp
+      )}°</span></li>`;
   });
   hourlyForecastElement.innerHTML = hourlyForecastHTML;
 }
