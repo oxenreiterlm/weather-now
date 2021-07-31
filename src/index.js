@@ -144,7 +144,7 @@ function showWeatherToday(response) {
   let todayLowTemp = document.querySelector(".todayLowTemp");
   let todayDailyDesc = document.querySelector(".todayDailyDesc");
   let highTempAPI = Math.round(response.data.daily[0].temp.max);
-  todayHighTemp.innerHTML = `${highTempAPI}°`;
+  todayHighTemp.innerHTML = `${highTempAPI}° / `;
   let lowTempAPI = Math.round(response.data.daily[0].temp.min);
   todayLowTemp.innerHTML = `${lowTempAPI}°`;
   todayDailyDesc.innerHTML = response.data.daily[0].weather[0].description;
