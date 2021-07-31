@@ -107,13 +107,12 @@ function convertTimeStampToHour(timestamp) {
 
 function showWeatherHourly(response) {
   let hourlyForecast = response.data.hourly;
-  let hourlyTemp = response.data.hourly[0].temp;
   console.log(response.data.hourly);
 
   let hourlyForecastElement = document.querySelector("#hourly-forecast");
   let hourlyForecastHTML = "";
   hourlyForecast.forEach(function (forecastHour, index) {
-    if (forecastHour.pop > 0.5) {
+    if (index < 6 && forecastHour.pop > 0.5) {
       hourlyForecastHTML =
         hourlyForecastHTML +
         `<li><span>${convertTimeStampToHour(
@@ -124,7 +123,7 @@ function showWeatherHourly(response) {
           forecastHour.pop * 100
         )}%
       </span><span>☂</span></li>`;
-    } else {
+    } else if (index < 6 && forecastHour.pop <= 0.5) {
       hourlyForecastHTML =
         hourlyForecastHTML +
         `<li><span>${convertTimeStampToHour(
