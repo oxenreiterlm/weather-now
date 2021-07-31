@@ -112,7 +112,7 @@ function showWeatherHourly(response) {
   let hourlyForecastElement = document.querySelector("#hourly-forecast");
   let hourlyForecastHTML = "";
   hourlyForecast.forEach(function (forecastHour, index) {
-    if (index < 6 && forecastHour.pop > 0.5) {
+    if (index < 8 && index > 0 && forecastHour.pop > 0.5) {
       hourlyForecastHTML =
         hourlyForecastHTML +
         `<li><span>${convertTimeStampToHour(
@@ -123,7 +123,7 @@ function showWeatherHourly(response) {
           forecastHour.pop * 100
         )}%
       </span><span>☂</span></li>`;
-    } else if (index < 6 && forecastHour.pop <= 0.5) {
+    } else if (index < 8 && index > 0 && forecastHour.pop <= 0.5) {
       hourlyForecastHTML =
         hourlyForecastHTML +
         `<li><span>${convertTimeStampToHour(
