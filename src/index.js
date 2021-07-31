@@ -81,15 +81,17 @@ function showWeatherHourly(response) {
   console.log(response.data.hourly[0].pop);
   let hourlyForecastElement = document.querySelector("#hourly-forecast");
   let hourlyForecastHTML = "";
-  hourlyForecast.forEach(function (forecastHour) {
-    hourlyForecastHTML =
-      hourlyForecastHTML +
-      `<li><span class="hourlyTime"></span><span class="hourlyPrecip">${Math.round(
-        forecastHour.pop * 10
-      )}%
-      </span>/<span class="hourlyTemp"></span><span class = "hourlyIcon">${Math.round(
+  hourlyForecast.forEach(function (forecastHour, index) {
+    if (index < 9 && index > 0) {
+      hourlyForecastHTML =
+        hourlyForecastHTML +
+        `<li><span class="hourlyTime"></span><span class="hourlyPrecip">💧${Math.round(
+          forecastHour.pop * 10
+        )}%
+      </span> / <span class="hourlyTemp"></span><span class = "hourlyIcon">${Math.round(
         forecastHour.temp
       )}°</span></li>`;
+    }
   });
   hourlyForecastElement.innerHTML = hourlyForecastHTML;
 }
