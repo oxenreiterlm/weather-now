@@ -81,16 +81,21 @@ function showWeatherHourly(response) {
   console.log(response.data.hourly[0].pop);
   let hourlyForecastElement = document.querySelector("#hourly-forecast");
   let hourlyForecastHTML = "";
-  hourlyForecast.forEach(function (forecastHour, index) {
-    if (index < 9 && index > 0) {
+  hourlyForecast.forEach(function (forecastHour) {
+    if (forecastHour.pop > 0.5) {
       hourlyForecastHTML =
         hourlyForecastHTML +
-        `<li><span class="hourlyTime"></span><span class="hourlyPrecip">💧${Math.round(
-          forecastHour.pop * 10
-        )}%
-      </span> / <span class="hourlyTemp"></span><span class = "hourlyIcon">${Math.round(
-        forecastHour.temp
-      )}°</span></li>`;
+        `<li><span></span><span>${Math.round(
+          forecastHour.temp
+        )}°</span> / <span></span><span>💧${Math.round(forecastHour.pop * 100)}%
+      </span><span>☂</span></li>`;
+    } else {
+      hourlyForecastHTML =
+        hourlyForecastHTML +
+        `<li><span></span><span>${Math.round(
+          forecastHour.temp
+        )}°</span> / <span></span><span>💧${Math.round(forecastHour.pop * 100)}%
+      </span><span>👟</span></li>`;
     }
   });
   hourlyForecastElement.innerHTML = hourlyForecastHTML;
@@ -144,7 +149,7 @@ function displayForecast(response) {
   let forecastHTML = "";
   forecast.forEach(function (forecastDay, index) {
     if (index < 5 && index > 0) {
-      let forecastPrecip = Math.round(forecastDay.pop * 10);
+      let forecastPrecip = Math.round(forecastDay.pop * 100);
       forecastHTML =
         forecastHTML +
         `<div class="col-3">
